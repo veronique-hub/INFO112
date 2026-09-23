@@ -226,10 +226,10 @@ temp_output="${output}.tmp"
 : > "$temp_output"
 
 
-#convert to bin
+#convert to bin hex
 for byte in "${bytes[@]}"; do
-    printf "\\$(printf '%03o' "$byte")" >> "$temp_output"
-done
+    printf '%02x' "$byte"
+done | xxd -r -p > "$temp_output"
 
 
 mv "$temp_output" "$output"
